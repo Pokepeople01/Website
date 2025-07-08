@@ -9,9 +9,46 @@
   <body>
 	<div class="content">
 		<h1>Welcome to here.</h1>
+		<div class="blog-post" id="2025-07-07">
+			<h2>July 07, 2025</h2>
+			<p>
+				I've been wanting to do some exploring into Windows' .exe format lately, as well as x86-64 assembly in general. There's something really interesting to me about looking at and understanding the exact bytes that your computer is also reading from, seeing byte-for-byte what your computer is told to do with no room for hidden instructions, behind-the-scenes compiler optimizations, or reading between the lines. At a level where what you see is really what you get.
+			</p>
+			<p>
+				It's dawning on me as I write this that even looking at the bytes of an executable program, there's still deeper layers to go. Looking at the raw object code and assembly instructions leaves no room for behind-the-scenes compiler or assembler optimizations. However, any program for Windows will still depend on calls to the Win32 APIs, and those are currently opaque to me. Granted, to make a Windows program, first I have to create the universe. I've got to start somewhere.
+			</p>
+			<p>
+				So, the first thing I did after setting up a project folder for this exploration was create myself a Hello World program in C:
+			</p>
+			<img 
+				src="blog\2025-07-07\images\Hello_World_C.PNG"
+				alt="My 'Hello World' program, written in C within Notepad++."
+				style="width:128px;height:128px;"
+			>
+			<p>
+				...and then, subsequently, install a compiler. Yeah, whoops. Forgot about that.
+			</p>
+			<p>
+				I opened the resulting hello_world.exe up in a hex editor, which told me what the resulting bytes were, but nothing about how to read them. After a brief stint looking into disassemblers, decompilers, and debuggers, I tried taking a look at my .exe in Ghirda. I'm not overly familiar with Ghirda, so that was intimidating. After that, I took a different approach and started looking for resources on Windows' EXE format.
+			</p>
+			<p>
+				That eventually lead me to <a href="https://0xrick.github.io/win-internals/pe2/">0xRick's A dive into the PE file format</a> article series. I've only read part-ways through Part 2 at the moment, but so far it's exactly what it says on the tin -- a (seemingly well-researched and thorough!) writeup on the Portable Executable (PE) file format that Windows has been using for its executables (and DLLs, system libraries, etc.) since the Windows NT days. Very cool. I also took this time to grab the PE-bear tool that 0xRick's articles use. It's a very nifty tool for viewing breakdowns for PE executables and their sections/headers.
+			</p>
+			<p>
+				My "Hello World" in PE-bear:
+			</p>
+			<img
+				src="blog\2025-07-07\images\Hello_World_PE-bear.PNG"
+				alt="My 'Hello World' program in PE-bear."
+				style="width:228px;height:128px;"
+			>
+			<p>
+				I fell down a really neat rabbit hole looking into the DOS Header and DOS Stub portions of the PE format, as well as the 'MZ' magic numbers that indicate an MS-DOS MZ executable. It's a fascinating relic of backwards compatibility, and I really like the idea of using a custom DOS Header/Stub to implement an MS DOS program within a fully-featured Windows PE executable. It could make for a neat easter egg, although I feel more potential for a slightly larger project. Could two instances of the same executable, one run under Windows and one under DOS Mode, communicate in interesting ways? Unsure at the moment. I'll sit on the idea for now.
+			</p>
+			<!-- end blog-post 2025-07-07 -->
+		</div>
 		<div class="blog-post" id="2025-07-01">
 			<h2>July 01, 2025</h2>
-			<!-- end blog-post 2025-07-01 -->
 			<p>
 				I haven't forgotten about this place. Admittedly, it's a bit intimidating to think about all of the potential directions to choose from. This place is currently more or less a blank canvas.
 			</p>
@@ -53,6 +90,7 @@
 				alt="An huge and intricately carved wooden alligator." 
 				style="width:171px;height:128px;"
 			>
+			<!-- end blog-post 2025-07-01 -->
 		</div> 
 		<div class="blog-post" id="2025-05-26"> 
 			<h2>May 26, 2025</h2>
